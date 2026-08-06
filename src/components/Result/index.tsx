@@ -12,16 +12,10 @@ export default function Result({ result }: Props) {
   return (
     <div className=" flex gap-4 overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3md:overflow-visible">
       <div className="min-w-[85%] snap-center md:min-w-0">
-        <InconsistenciesCard inconsistencies={result.inconsistencies} />
-      </div>
-      <div className="min-w-[85%] snap-center md:min-w-0">
         <ComplexityCard
           level={result.complexityLevel}
           score={result.complexityScore}
         />
-      </div>
-      <div className="min-w-[85%] snap-center md:min-w-0">
-        <AISummaryCard summary={result.summary} />
       </div>
       <div className="min-w-[85%] snap-center md:min-w-0">
         <MedicalInformationCard
@@ -32,6 +26,12 @@ export default function Result({ result }: Props) {
       </div>
       <div className="min-w-[85%] snap-center md:min-w-0">
         <MissingDocsCard documents={result.missingDocs} />
+      </div>
+      <div className="min-w-[85%] snap-center md:min-w-0">
+        <InconsistenciesCard inconsistencies={result.inconsistencies} />
+      </div>
+      <div className="min-w-[85%] snap-center md:min-w-0">
+        <AISummaryCard summary={result.summary} />
       </div>
     </div>
   );
