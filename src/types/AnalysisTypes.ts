@@ -1,8 +1,7 @@
 export interface Inconsistency {
   id: number;
   title: string;
-  description: string;
-  severity: "low" | "medium" | "high";
+  severity: "Baixa" | "Média" | "Alta";
 }
 
 export interface AnalysisResult {
