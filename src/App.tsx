@@ -1,10 +1,6 @@
-import {Route, Routes} from 'react-router'
-import Home from './pages/Home'
+import Home from "./pages/Home";
+import "./styles/index.css";
 
-export default function App() {  
-  return (
-    <Routes>
-        <Route index path="/" element={ <Home /> } />
-    </Routes>
-  )
+export default function App() {
+  return <Home />;
 }

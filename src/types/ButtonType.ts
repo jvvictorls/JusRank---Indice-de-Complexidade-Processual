@@ -1,4 +1,7 @@
 export type ButtonType = {
-    text: string;
-    style: string;
-}
+  figure?: React.ReactNode;
+  disabled?: boolean;
+  text: string;
+  style: string;
+  onClick?: () => void;
+};
