@@ -15,17 +15,17 @@ export default function Result({ result }: Props) {
     <div className="mt-8 space-y-4">
       <div>
         <h3 className="font-semibold">Score</h3>
-        <p>{result.score}</p>
+        <p>{result.complexityScore}</p>
       </div>
 
       <div>
         <h3 className="font-semibold">Parecer</h3>
         <p
           className={`rounded-full px-3 py-1 text-sm text-white ${
-            severityColor[result.complexity]
+            severityColor[result.complexityLevel]
           }`}
         >
-          Complexidade: {result.complexity}
+          Complexidade: {result.complexityLevel}
         </p>
       </div>
 
@@ -38,7 +38,7 @@ export default function Result({ result }: Props) {
               key={item.id}
               className="flex items-center justify-between rounded-lg border p-4"
             >
-              <span>{item.title}</span>
+              <span>{item.type}</span>
 
               <span
                 className={`rounded-full px-3 py-1 text-sm text-white ${

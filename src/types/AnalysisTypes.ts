@@ -1,11 +1,12 @@
 export interface Inconsistency {
   id: number;
-  title: string;
+  type: string;
+  description: string
   severity: "Baixa" | "Média" | "Alta";
 }
 
 export interface AnalysisResult {
-  score: number;
-  complexity: "Baixa" | "Média" | "Alta";
+  complexityScore: number;
+  complexityLevel: "Baixa" | "Média" | "Alta";
   inconsistencies: Inconsistency[];
 }
