@@ -1,11 +1,12 @@
 import Header from "../components/Header";
 import FileUpload from "../components/FileUpload";
 import Button from "../components/button";
-import Loading from "../components/loading";
-import Result from "../components/result";
+import Loading from "../components/Loading";
+import Result from "../components/Result";
 import { Sparkles } from "lucide-react";
 import { useState } from "react";
 import type { AnalysisResult } from "../types/AnalysisTypes";
+import { analyzeInitialPetition } from "../services/analyze.service";
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
@@ -13,51 +14,20 @@ export default function Home() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loadingMessage, setLoadingMessage] = useState("");
 
-  console.log(result);
-
-  const wait = (ms: number) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-
   //Function to handle the form submission
   const handleSubmittForm = async () => {
     if (!file) return;
 
-    setLoading(true);
-    setResult(null);
+    try {
+      setLoading(true);
 
-    setLoadingMessage("Extraindo texto do PDF...");
-    await wait(1200);
-
-    setLoadingMessage("Analisando inconsistências...");
-    await wait(1800);
-
-    setLoadingMessage("Calculando índice...");
-    await wait(1500);
-
-    setResult({
-      score: 82,
-      complexity: "Alta",
-      inconsistencies: [
-        {
-          id: 1,
-          title: "Documentação incompleta",
-          severity: "Alta",
-        },
-        {
-          id: 2,
-          title: "Divergência",
-          severity: "Média",
-        },
-        {
-          id: 3,
-          title: "Múltiplas causas",
-          severity: "Baixa",
-        },
-      ],
-    });
-
-    setLoading(false);
+      const { data } = await analyzeInitialPetition(file);
+      setResult(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
