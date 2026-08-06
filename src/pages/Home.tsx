@@ -12,7 +12,6 @@ export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
-  const [loadingMessage, setLoadingMessage] = useState("");
 
   //Function to handle the form submission
   const handleSubmittForm = async () => {
@@ -43,7 +42,7 @@ export default function Home() {
             style=" cursor-pointer flex justify-center my-6 w-full rounded-lg px-6 py-3 font-semibold bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
             onClick={handleSubmittForm}
           />
-          {loading && <Loading message={loadingMessage} />}
+          {loading && <Loading />}
           {result && <Result result={result} />}
         </div>
       </div>
