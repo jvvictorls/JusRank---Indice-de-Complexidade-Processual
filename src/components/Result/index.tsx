@@ -2,6 +2,8 @@ import type { AnalysisResult } from "../../types/AnalysisTypes";
 import ComplexityCard from "./ComplexityCard";
 import AISummaryCard from "./AiSummaryCard";
 import InconsistenciesCard from "./InconsistenciesCard";
+import MedicalInformationCard from "./MedicalInformationCard";
+import MissingDocsCard from "./MissingDocsCard";
 type Props = {
   result: AnalysisResult;
 };
@@ -20,6 +22,16 @@ export default function Result({ result }: Props) {
       </div>
       <div className="min-w-[85%] snap-center md:min-w-0">
         <AISummaryCard summary={result.summary} />
+      </div>
+      <div className="min-w-[85%] snap-center md:min-w-0">
+        <MedicalInformationCard
+          cids={result.cids}
+          dates={result.importantDates}
+          diagnostics={result.diagnostics}
+        />
+      </div>
+      <div className="min-w-[85%] snap-center md:min-w-0">
+        <MissingDocsCard documents={result.missingDocs} />
       </div>
     </div>
   );

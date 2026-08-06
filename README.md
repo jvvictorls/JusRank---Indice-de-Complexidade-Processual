@@ -133,27 +133,26 @@ A IA deverá identificar automaticamente:
 
 # Índice de Complexidade Processual (ICP)
 
-Cada inconsistência recebe um peso.
+| Inconsistência                 | Peso (%) |
+| ------------------------------ | -------: |
+| Documento sem data             |   **10** |
+| CAT ausente                    |   **14** |
+| CID sem comprovação documental |   **19** |
+| Benefício incompatível         |   **14** |
+| Datas conflitantes             |   **10** |
+| Exame ausente                  |   **19** |
+| Informação contraditória       |   **14** |
+| **Total**                      |  **100** |
 
-| Inconsistência | Peso |
-|----------------|-----:|
-| Documento sem data | 2 |
-| CAT ausente | 3 |
-| CID sem comprovação documental | 4 |
-| Benefício incompatível | 3 |
-| Datas conflitantes | 2 |
-| Exame ausente | 4 |
-| Informação contraditória | 3 |
-
-O score é calculado pela soma dos pesos.
+O **Score** é calculado pela soma dos pesos.
 
 ### Classificação
 
 | Pontuação | Classificação |
-|-----------|---------------|
-| 0 - 3 | 🟢 Baixa |
-| 4 - 7 | 🟡 Média |
-| 8+ | 🔴 Alta |
+| --------- | ------------- |
+| 0 - 30    | 🟢 Baixa      |
+| 31 - 69   | 🟡 Média      |
+| 70+       | 🔴 Alta       |
 
 ---
 
@@ -209,14 +208,8 @@ jusrank
 
 ```json
 {
-  "cids": [
-    "M75.1",
-    "G56.0"
-  ],
-  "documentosAusentes": [
-    "CAT",
-    "Exame do punho"
-  ],
+  "cids": ["M75.1", "G56.0"],
+  "documentosAusentes": ["CAT", "Exame do punho"],
   "inconsistencias": [
     {
       "descricao": "Ressonância sem data",
@@ -380,12 +373,16 @@ Resultado apresentado ao usuário
 - Vite
 - TailwindCSS
 - Axios
+- lucide-react
 
 ## Back-end
 
 - Node.js
 - Express
 - OpenAI API
+- pdf-parse
+- multer
+- typescript
 
 ---
 
@@ -422,25 +419,25 @@ A IA deverá identificar automaticamente:
 
 Cada inconsistência recebe um peso.
 
-| Inconsistência | Peso |
-|----------------|-----:|
-| Documento sem data | 2 |
-| CAT ausente | 3 |
-| CID sem comprovação documental | 4 |
-| Benefício incompatível | 3 |
-| Datas conflitantes | 2 |
-| Exame ausente | 4 |
-| Informação contraditória | 3 |
+| Inconsistência                 | Peso |
+| ------------------------------ | ---: |
+| Documento sem data             |    2 |
+| CAT ausente                    |    3 |
+| CID sem comprovação documental |    4 |
+| Benefício incompatível         |    3 |
+| Datas conflitantes             |    2 |
+| Exame ausente                  |    4 |
+| Informação contraditória       |    3 |
 
 O score é calculado pela soma dos pesos.
 
 ### Classificação
 
 | Pontuação | Classificação |
-|-----------|---------------|
-| 0 - 3 | 🟢 Baixa |
-| 4 - 7 | 🟡 Média |
-| 8+ | 🔴 Alta |
+| --------- | ------------- |
+| 0 - 3     | 🟢 Baixa      |
+| 4 - 7     | 🟡 Média      |
+| 8+        | 🔴 Alta       |
 
 ---
 
@@ -496,28 +493,30 @@ jusrank
 
 ```json
 {
-  "cids": [
-    "M75.1",
-    "G56.0"
+  "cids": ["M75.1", "G56.0"],
+  "diagnostics": ["Lesão do manguito rotador", "Síndrome do túnel do carpo"],
+  "importantDates": [
+    "Data de admissão: 10/03/2022",
+    "Data do afastamento: 15/08/2024"
   ],
-  "documentosAusentes": [
-    "CAT",
-    "Exame do punho"
-  ],
-  "inconsistencias": [
+  "missingDocs": ["CAT", "Exame de ressonância magnética do punho"],
+  "complexityScore": 78,
+  "complexityLevel": "Alta",
+  "inconsistencies": [
     {
-      "descricao": "Ressonância sem data",
-      "peso": 2
+      "type": "Exame sem data",
+      "description": "Ressonância magnética apresentada sem identificação da data de realização.",
+      "severity": "Média",
+      "weight": 10
     },
     {
-      "descricao": "CID G56.0 sem exame correspondente",
-      "peso": 4
+      "type": "CID sem comprovação documental",
+      "description": "CID G56.0 informado no processo sem exame médico correspondente que comprove o diagnóstico.",
+      "severity": "Alta",
+      "weight": 19
     }
   ],
-  "indiceComplexidade": {
-    "pontuacao": 9,
-    "nivel": "Alta"
-  }
+  "summary": "O processo apresenta alta complexidade devido à necessidade de perícia médica, ausência de documentos essenciais e inconsistências relacionadas aos diagnósticos apresentados."
 }
 ```
 
