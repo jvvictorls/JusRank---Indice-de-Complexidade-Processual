@@ -6,6 +6,5 @@ export const analyzeInitialPetition = async (file: File) => {
 
   formData.append("file", file);
   const response = await api.post<AnalysisResult>("/process", formData);
-  console.log(response);
   return response;
 };
